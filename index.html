@@ -6,30 +6,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Clock</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unicons.iconsout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 </head>
 <body>
     <div class="digital-clock">
+        <i class="uil uil-ellipsis-v dot-menu-btn"></i>
+        <ul class="dot-menu">
+            <li class="menu-item">
+                <span class="clock-format-text">24-hour format</span>
+                <div class="format-switch-btn"></div>
+            </li>
+        </ul>
         <div class="time">
-            <span class="hour">08</span>
+            <span class="hours">08</span>
             <span class="dots">:</span>
             <span class="minutes">30</span>
             <div class="right-side">
-                <span class="period">PM</span>
+                <span class="period">AM/PM</span>
                 <span class="seconds">20</span>
             </div>
         </div>
         <div class="calendar">
-            <span class="month-name">March</span>,
-            <span class="day-name">Sunday</span>
-            <span class="day-number">6</span>
-            <span class="year">2022</span>
+            <span class="month-name">Month</span>,
+            <span class="day-name">Day</span>
+            <span class="day-number">00</span>
+            <span class="year">0000</span>
         </div>
     </div>
 
 <script>
     //Get Current time in JavaScript
+    function clock(){
+        var today = new Date();
+
+        var hours = today.getHours();
+        var minutes = today.getMinutes();
+        var seconds = today.getSeconds();
+        let period = "AM";
+
+        //Set the time period (AM/PM)
+        if(hours >= 12){
+            period = "PM";
+        }
+
+
+        //Set the 12-hour clock format
+        hours = hours >12 ? hours % 12 : hours;
+
+        //Add the 0 for the values lower than 10
+        if(hours < 10){
+            hours = "0"+hours;
+        }
+
+        if(minutes < 10){
+            minutes = "0"+minutes;
+        }
+
+        if(seconds < 10){
+            seconds = "0"+seconds;
+        }
+
+        
+
+
+        document.querySelector(".hours").innerHTML = hours;
+        document.querySelector(".minutes").innerHTML = minutes;
+        document.querySelector(".seconds").innerHTML = seconds;
+        document.querySelector(".period").innerHTML = period;
+
+    }
+
+    var updateClock = setInterval(clock, 1000);
+
+    //Get the date in javascript
+    var today = new Date();
+    const dayNumber = today.getDate();
+    const year = today.getFullYear(); 
+    const dayName = today.toLocaleDateString("default",{weekday:"long"}); 
+    const monthName = today.toLocaleDateString("default",{month:"short"});
     
+    document.querySelector(".month-name").innerHTML = monthName; 
+    document.querySelector(".day-name").innerHTML = dayName; 
+    document.querySelector(".day-number").innerHTML = dayNumber; 
+    document.querySelector(".year").innerHTML = year; 
 </script>
 </body>
 </html>
