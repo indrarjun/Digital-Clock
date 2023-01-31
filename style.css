@@ -28,6 +28,36 @@ body{
     align-items: center;
     flex-direction: column;
 }
+.digital-clock:before{
+    content:'';
+    position: absolute;
+    background: linear-gradient(45deg, #24ff6d, #2f93f1,#ff5e9a);
+    background-size: 200% 200%;
+    top: -5px;
+    bottom: -5px;
+    right: -5px;
+    left: -5px;
+    z-index: -1;
+    filter: blur(40px);
+    animation: glowing 10s ease infinite;
+}
+
+@keyframes glowing {
+    0%{
+        background-position: 0 50%;
+    }
+
+    50%{
+        background-position: 100% 50%;
+    }
+
+    100%{
+        background-position: 0 50%;
+    }
+
+
+    
+}
 
 .time{
     position: relative;
@@ -124,13 +154,23 @@ body{
 
 .dot-menu{
     z-index: 999;
+    position: absolute;
+    top:7px;
+    right:5px; 
     list-style: none;
     background:#35544b;
     padding: 10px 20px;
     border-radius: 5px;
     box-shadow:  0 5px 25px rgba(0,0,0,0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s ease;
 }
 
+.dot-menu.active{
+    visibility: visible;
+    opacity: 1;
+}
 .menu-item{
     display: flex;
     justify-content: center;
@@ -162,4 +202,12 @@ body{
     border-radius: 50%;
     box-shadow: 0 5px 25px #42ab4d;
     transform:  translate(-10px);
+    transition: 0.3s ease;
+    transition-property: background, transform;
+}
+
+.format-switch-btn.active:before{
+    background-color: #32cd42;
+    box-shadow: 0 5px 25px #42ab4d;
+    transform: translateX(20px);
 }
